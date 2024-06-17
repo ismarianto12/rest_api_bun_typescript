@@ -1,26 +1,24 @@
 export class Production {
-    private request: Request;
-
+    public request: Request;
     constructor(request: Request) {
         this.request = request; // Store the request object for potential future use
     }
-
-    // Function to retrieve list data
-    async listdata(request: Request): Promise<Response> {
+    async listdata(): Promise<Response> {
         const dataList = [];
         return Response.json({ success: true, data: this.request.body });
     }
-    // Function to update data (assuming you want actual data updates)
     async updatedata(request: Request): Promise<Response> {
-        const dataList = [];
-        return Response.json({ success: true, data: "Data updated successfully" });
+        const data: any = await request.json();
+        const { string: nama_product, string: kode } = data;
+        // console.log("Received JSON:", nama_product, kode);
+        // action service.product.create(data)
+        // example payload  
+        // {
+        //     "nama_product":"adasd","kode":"SABUN BUNDA BUNDA RAHMA"
+        // }
+        return Response.json({ success: true, data: "Data updated successfully", items: data });
     }
-
-    // Function to delete data (assuming you want actual data deletion)
     async delete(id: BigInteger): Promise<Response> {
-        // Implement logic to delete data based on the ID
-        // This could involve database deletions, API calls, or other actions
-
         return Response.json({ success: true, data: "Data deleted successfully" });
     }
 }
